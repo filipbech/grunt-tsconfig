@@ -19,10 +19,34 @@ module.exports = function(grunt) {
   grunt.registerMultiTask('tsconfig', 'Creates typescript tsconfig.json based on options and fileGlobs.', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({});
+	var files = options.filesGlob;
 
-	options.files = expand(options.filesGlob);
+	var dir = '';
 
-	grunt.file.write('tsconfig.json', JSON.stringify(options, null, 2));
+	if(this.data.rootDir) {
+		if(this.data.rootDir.slice(this.data.rootDir.length-1) === '/') {
+			dir = this.data.rootDir;
+		} else {
+			dir = this.data.rootDir+'/';
+		}
+	}
+
+	if(this.data.rootDir) {
+		files = files.map(function(g) {
+			if(g.indexOf('!') === 0) {
+				return '!'+dir+g.slice(1);
+
+			}
+			return dir+g;
+		});
+		options.additionalOptions.files = expand(files).map(function(file) {
+			return file.replace(dir,'');
+		});;
+	} else {
+		options.additionalOptions.files = expand(files);
+	}
+
+	grunt.file.write(dir+'tsconfig.json', JSON.stringify(options.additionalOptions, null, 2));
 
 	grunt.log.writeln('tsconfig created');
 

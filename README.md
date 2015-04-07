@@ -22,15 +22,16 @@ grunt.initConfig({
 					'components/**/*.ts',
 					'!components/**/*.spec.ts'
 				],
-			
-				/* Anything else added will be put into the tsconfig.json file */
-				compilerOptions:{
-					"module": "commonjs",
-					"noImplicitAny": true,
-					"removeComments": true,
-					"preserveConstEnums": true,
-					"out": "../../built/local/tsc.js",
-					"sourceMap": true
+
+				/* if rootDir is provided, this will be the output-destination of the file, and the starting-point of the filesGlob */
+				rootDir:'scripts/',
+
+				/* Anything added to "additionalOptions" will also be put into the tsconfig.json file */
+				additionalOptions: {
+					compilerOptions:{
+						"version":"1.5.0",
+						"sourceMap": true
+					},
 				}
 
 			}
@@ -45,4 +46,4 @@ Issues and pull-requests are appreciated. Reach out on twitter @filipbech for qu
 
 ## Release History
 
-0.1.0 Initial release 
+0.1.0 Initial release

@@ -1,7 +1,7 @@
 {
   "name": "grunt-tsconfig",
   "description": "Creates typescript tsconfig.json based on options and fileGlobs.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/filipbech/grunt-tsconfig",
   "author": {
     "name": "Filip Bruun Bech-Larsen",
